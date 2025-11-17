@@ -1,0 +1,22 @@
+# ====== SECURITY ======
+
+# Disable directory listing
+Options -Indexes
+
+# Protect sensitive files
+<FilesMatch "\.(json|log|md|gitignore|ini|sh|py|ipynb)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Disable access to .htaccess itself
+<Files ".htaccess">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# ====== ROUTING (optional, for clean URLs) ======
+RewriteEngine On
+
+# Protect private folder if accidentally placed in public
+RewriteRule ^private/ - [F,L]
